@@ -23,12 +23,12 @@
     
 <h1> Make the script executable: </h1>
     
-   chmod +x mao-app/mao.sh
+    chmod +x mao-app/mao.sh
 
 <h1> Run the script: </h1>
     
-    cd /path/to/script_directory
-   ./mao.sh
+      cd /path/to/script_directory
+      ./mao.sh
 
 <p> The script may take a few minutes to complete. After the script is done, 
   the Mao App frontend should be accessible at http://instance-public-IP:3000. </p>
