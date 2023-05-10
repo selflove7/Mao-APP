@@ -123,7 +123,9 @@ pm2 save
 # Create artifact of the maoApp directory
 
 mkdir -p "$ARTIFACTS_DIR"
-tar -czvf "$ARTIFACTS_DIR/maoApp.tar.gz" "$APP_DIR"
+zip -r "$ARTIFACTS_DIR/maoApp_$(date +%Y%m%d%H%M%S).zip" "$APP_DIR"
+
+# tar -czvf "$ARTIFACTS_DIR/maoApp.tar.gz" "$APP_DIR"
 
 # Fetch the external IP address
 
