@@ -22,7 +22,7 @@ APP_DIR="/root/maoApp"
 sudo kill -9 $(sudo lsof -t -i:3000) || true
 pm2 delete all || true
 
-# Update the system and install necessary packages
+# Update the system and install necessary packages if not installed
 
 sudo yum update -y
 sudo yum install -y git
