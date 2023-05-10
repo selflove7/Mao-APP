@@ -30,7 +30,7 @@ sudo yum install -y git
 # Define version numbers
 
 NODE_VERSION=14.16.1
-PM2_VERSION=5.1.0
+PM2_VERSION5.3.0
 
 # Install nvm and Node.js
 
