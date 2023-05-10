@@ -1,5 +1,15 @@
 #!/bin/bash
 
+######################################################################
+# Purpose: Deploying and running the "maoApp" application using PM2
+# Version: 14.16.1
+# Created Date: 2023-05-10
+# Modified Date: [Insert Date]
+# Author: Mao
+######################################################################
+
+# START #
+
 set -e
 
 # Set variables
@@ -29,24 +39,33 @@ source ~/.bashrc
 
 cd /usr/local/src
 
+# Remove existing Node.js tarball if present
+
 if [ -e "/usr/local/src/node-v14.16.1-linux-x64.tar.xz" ]; then
     rm /usr/local/src/node-v14.16.1-linux-x64.tar.xz
-    echo "File deleted"
+    echo "Node.js tarball deleted"
 else
-    echo "File not found"
+    echo "Node.js tarball not found"
 fi
+
+# Download and extract Node.js
 
 sudo wget https://nodejs.org/dist/v14.16.1/node-v14.16.1-linux-x64.tar.xz
 sudo tar -xJf node-v14.16.1-linux-x64.tar.xz
+
+# Remove existing Node.js directory if present
 
 if [ -d "/opt/nodejs/node-v14.16.1-linux-x64" ]; then
     sudo rm -rf /opt/nodejs/node-v14.16.1-linux-x64
     echo "Directory removed"
 fi
 
+# Remove old Node.js and NPM binaries
+
 sudo rm /usr/local/bin/node
 sudo rm /usr/local/bin/npm
 
+# Move extracted Node.js directory to /opt/nodejs and create symbolic links
 
 sudo mv node-v14.16.1-linux-x64 /opt/nodejs
 sudo ln -s /opt/nodejs/bin/node /usr/local/bin/node
@@ -106,4 +125,21 @@ pm2 save
 mkdir -p "$ARTIFACTS_DIR"
 tar -czvf "$ARTIFACTS_DIR/maoApp.tar.gz" "$APP_DIR"
 
-echo "Applications are running with pm2"
+# Fetch the external IP address
+
+IP_ADDRESS=$(curl -sSf icanhazip.com)
+
+# Define the URL for checking the Node.js application
+
+APP_URL="http://$IP_ADDRESS:3000"
+
+# Make a request to the application and check the response
+
+response=$(curl -sSf "$APP_URL")
+if [ $? -eq 0 ]; then
+    echo "Node.js application is up and running"
+else
+    echo "Node.js application is not responding"
+fi
+
+# END #
