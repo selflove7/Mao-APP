@@ -120,12 +120,25 @@ pm2 start npm --name "maoFrontend" -- run dev
 
 pm2 save
 
-# Create artifact of the maoApp directory
+# Create artifact directory with current date and time
+
+DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+ARTIFACTS_DIR="$ARTIFACTS_DIR/maoApp_$DATE"
 
 mkdir -p "$ARTIFACTS_DIR"
-zip -r "$ARTIFACTS_DIR/maoApp_$(date +%Y%m%d%H%M%S).zip" "$APP_DIR"
 
-# tar -czvf "$ARTIFACTS_DIR/maoApp.tar.gz" "$APP_DIR"
+# Create artifact of the maoFrontend directory
+
+cd  "$APP_DIR/maoFrontend"
+npm pack
+mv "mao_frontend-0.1.0.tgz" "$ARTIFACTS_DIR/"
+
+# Create artifact of the maoBackend directory
+
+cd "$APP_DIR/maoBackend"
+npm pack
+mv "maobackend-1.0.0.tgz" "$ARTIFACTS_DIR/"
+
 
 # Fetch the external IP address
 
