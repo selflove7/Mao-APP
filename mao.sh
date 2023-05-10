@@ -62,8 +62,8 @@ fi
 
 # Remove old Node.js and NPM binaries
 
-sudo rm /usr/local/bin/node
-sudo rm /usr/local/bin/npm
+sudo rm -f /usr/local/bin/node
+sudo rm -f /usr/local/bin/npm
 
 # Move extracted Node.js directory to /opt/nodejs and create symbolic links
 
