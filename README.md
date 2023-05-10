@@ -19,6 +19,7 @@
 
 <p> Clone the Mao App setup script from GitHub to your instance: </p>
 
+    yum install git -y
     git clone https://github.com/selflove7/mao-app.git
     
 <h1> Make the script executable: </h1>
